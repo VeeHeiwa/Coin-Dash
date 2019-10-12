@@ -2,7 +2,7 @@ extends Area2D
 
 export (int) var speed
 var velocity =  Vector2()
-var screen_size = Vector2(480,720)
+var screen_size
 
 func get_input():
 	if Input.is_action_pressed('left'):
@@ -20,6 +20,11 @@ func get_input():
 	if velocity.length() > 0:
 		velocity = velocity.normalized()
 
+
+func setScreenSize(size):
+	screen_size = size
+
+
 func start():
 	position = screen_size / 2
 	
@@ -29,7 +34,8 @@ func die():
 
 
 func _ready():
-	start()
+	pass
+	 #start()
 
 
 func _process(delta):
