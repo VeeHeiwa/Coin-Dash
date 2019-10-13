@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/grass.png" type="Texture" id=3]
 [ext_resource path="res://scenes/ThePlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/hud.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -20,7 +21,16 @@ stretch_mode = 2
 
 [node name="GameTimer" type="Timer" parent="."]
 
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="ThePlayer" parent="." instance=ExtResource( 4 )]
 position = Vector2( 250.439, 447.15 )
 
 [node name="CoinContainer" type="Node2D" parent="."]
+
+[node name="hud" parent="." instance=ExtResource( 5 )]
+[connection signal="start_game" from="." to="." method="_on_Main_start_game"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
